@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dska7to48mf7t"]
+
+[ext_resource type="Texture2D" uid="uid://dxh74huljhvy5" path="res://Assets/Cell/normal_cell.png" id="1_efq80"]
+[ext_resource type="Script" uid="uid://c1d17n5s5fil5" path="res://Scripts/cell.gd" id="2_da881"]
+
+[node name="Cell" type="Sprite2D"]
+texture = ExtResource("1_efq80")
+script = ExtResource("2_da881")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[connection signal="gui_input" from="Control" to="." method="_on_control_gui_input"]
