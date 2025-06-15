@@ -2,17 +2,22 @@ extends Sprite2D
 
 var pressed : bool = false
 var flagged: bool = false
+var has_mine: bool = false
+var mines_around: int
 
 func open_cell() -> void:
 	if flagged:
+		return
+	
+	if has_mine:
+		var mine_texture = preload("res://Assets/Cell/mine.png")
+		texture = mine_texture
 		return
 	
 	print(self, " pressed")
 	var pressed_texutre = preload("res://Assets/Cell/pressed_cell.png")
 	texture = pressed_texutre
 	pressed = true
-	
-
 
 func flag_cell() -> void:
 	

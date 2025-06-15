@@ -1,23 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjow5vfiwpx5i"]
-
-[ext_resource type="PackedScene" uid="uid://dska7to48mf7t" path="res://Scenes/cell.tscn" id="1_jjgbg"]
+[gd_scene format=3 uid="uid://bjow5vfiwpx5i"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Cell" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(464, 144)
-
-[node name="Cell3" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(432, 176)
-
-[node name="Cell2" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(496, 144)
-
-[node name="Cell4" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(432, 144)
-
-[node name="Cell5" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(464, 176)
-
-[node name="Cell6" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(496, 176)
+[node name="Cell" type="Node" parent="."]
