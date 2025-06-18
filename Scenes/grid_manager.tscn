@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwsrxdby423o1"]
 
-[ext_resource type="Script" uid="uid://f16fae7t16f4" path="res://grid_generator.gd" id="1_4xyke"]
+[ext_resource type="Script" uid="uid://f16fae7t16f4" path="res://Scripts/grid_manager.gd" id="1_4xyke"]
 [ext_resource type="PackedScene" uid="uid://dska7to48mf7t" path="res://Scenes/cell.tscn" id="2_waf44"]
 
 [node name="GridManager" type="Node2D"]
 script = ExtResource("1_4xyke")
 cell_scene = ExtResource("2_waf44")
-cuadratic_size = 20
+cuadratic_size = 15
+mine_probability = 0.9

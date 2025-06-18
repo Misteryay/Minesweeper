@@ -1,6 +1,7 @@
 extends Sprite2D
 
 signal empty_cell(cell)
+signal mine
 
 var pressed : bool = false
 var flagged: bool = false
@@ -8,20 +9,28 @@ var has_mine: bool = false
 var mines_around: int = 0
 var coordinates: Vector2 = Vector2.ZERO
 
+func _ready() -> void:
+	var grid_manager = get_parent()
+	connect("empty_cell", Callable(grid_manager, "on_empty_cell"))
+	connect("mine", Callable(grid_manager, "on_mine_exploded"))
+
 func open_cell() -> void:
-	if flagged:
+	if flagged or pressed:
 		return
 	
 	if has_mine:
 		var mine_texture = preload("res://Assets/Cell/mine.png")
-		texture = mine_texture
 		pressed = true
+		emit_signal("mine")
+		texture = mine_texture
 		return
 	
-	var pressed_texture : Texture 
+	var pressed_texture : Texture
+	pressed = true
 	match mines_around:
 		0:
 			pressed_texture = preload("res://Assets/Cell/pressed_cell.png")
+			
 			emit_signal("empty_cell", self)
 		1:
 			pressed_texture = preload("res://Assets/Cell/1_mine.png")
@@ -41,8 +50,7 @@ func open_cell() -> void:
 			pressed_texture = preload("res://Assets/Cell/8_mines.png")
 	
 	texture = pressed_texture
-	pressed = true
-	
+
 
 func flag_cell() -> void:
 	

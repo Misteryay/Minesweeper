@@ -2,6 +2,7 @@ extends Node2D
 
 @export var cell_scene: PackedScene
 @export var cuadratic_size: int = 3
+@export var mine_probability: float = 0.20 # Values between 0 and 1. 1 meaning everything is a bomb
 
 const CELL_WIDTH = 32
 const CELL_HEIGHT = 32
@@ -18,11 +19,10 @@ func _ready() -> void:
 		grid[y] = []
 		grid[y].resize(cuadratic_size)
 		
-	var cells: Array[Array] = generate_grid()
-	cells_grid = cells
-	add_random_bombs(cells)
-	get_grid_map(cells)
-	set_mines_around_cell(cells)
+	cells_grid = generate_grid()
+	add_random_bombs(cells_grid)
+	get_grid_map(cells_grid)
+	set_mines_around_cell(cells_grid)
 	
 	#print_grid()
 	
@@ -55,7 +55,7 @@ func add_random_bombs(cells: Array[Array]) -> void:
 	for row in range(cuadratic_size):
 		for column in range(cuadratic_size):
 			var rand_number = randf()
-			if rand_number < 0.20:
+			if rand_number < mine_probability:
 				var cell = cells[column][row]
 				cell.has_mine = true
 				total_mines *= 1
@@ -98,6 +98,8 @@ func get_cell_neighbours(cell, cells) -> Array:
 				continue
 					
 			var neighbor_cell = cells[neighbor_y][neighbor_x]
+			if neighbor_cell.coordinates == cell.coordinates:
+				continue
 			neighbour_cells.append(neighbor_cell)
 	return neighbour_cells
 
@@ -109,3 +111,15 @@ func print_grid() -> void:
 		for x in range(cuadratic_size):
 			line += "%d " % grid[y][x]
 		print(line.strip_edges())
+
+func on_empty_cell(cell) -> void:
+	var neighbours = get_cell_neighbours(cell, cells_grid)
+	for neighbor in neighbours:
+			neighbor.open_cell()
+
+func on_mine_exploded() -> void:
+	for row in range(cuadratic_size):
+		for column in range(cuadratic_size):
+			var current_cell = cells_grid[column][row]
+			if current_cell.has_mine:
+				current_cell.open_cell()
