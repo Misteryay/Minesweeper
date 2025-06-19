@@ -7,4 +7,3 @@
 script = ExtResource("1_4xyke")
 cell_scene = ExtResource("2_waf44")
 cuadratic_size = 15
-mine_probability = 0.9

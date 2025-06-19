@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://c65uaugtqo0me"]
+
+[ext_resource type="Script" uid="uid://bf2mnl2ebtlbt" path="res://Scenes/main_menu.gd" id="1_28flt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ehe0"]
+bg_color = Color(0.306579, 0.0600529, 0.250469, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce3w2"]
+bg_color = Color(0.305882, 0.0588235, 0.25098, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48xlc"]
+bg_color = Color(0.352941, 0, 0.00392157, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.81604, 0.358651, 0.479228, 1)
+shadow_size = 2
+shadow_offset = Vector2(-0.695, 4.22)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n45e2"]
+bg_color = Color(0.352941, 0, 0.00392157, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.81604, 0.358651, 0.479228, 1)
+shadow_size = 2
+shadow_offset = Vector2(-0.695, 4.22)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28flt"]
+bg_color = Color(0.352941, 0, 0.00392157, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.81604, 0.358651, 0.479228, 1)
+shadow_size = 2
+shadow_offset = Vector2(-0.695, 4.22)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erv1k"]
+bg_color = Color(0.352349, 2.1719e-06, 0.00441198, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.81604, 0.358651, 0.479228, 1)
+shadow_size = 2
+shadow_offset = Vector2(-0.695, 4.22)
+
+[node name="MainMenu" type="VBoxContainer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -128.5
+offset_right = 218.0
+offset_bottom = 128.5
+grow_vertical = 2
+script = ExtResource("1_28flt")
+
+[node name="GridLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ehe0")
+text = "Set grid size.
+Integer values."
+
+[node name="GridInput" type="LineEdit" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
+placeholder_text = "Default: 15"
+
+[node name="ProbabilityLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ehe0")
+text = "Set Mine probability.
+Values between 0 and 1
+[0-1]"
+
+[node name="ProbabilityInput" type="LineEdit" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
+placeholder_text = "Default: 0.20"
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_48xlc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+text = "Start Game"
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]

@@ -7,17 +7,17 @@ extends Node2D
 const CELL_WIDTH = 32
 const CELL_HEIGHT = 32
 
-var grid = []
+var mines_grid: Array = []
 var total_mines : int = 0
 var cells_grid: Array
 
-func _ready() -> void:
+func start() -> void:
 	center_grid()
 
-	grid.resize(cuadratic_size)
+	mines_grid.resize(cuadratic_size)
 	for y in range(cuadratic_size):
-		grid[y] = []
-		grid[y].resize(cuadratic_size)
+		mines_grid[y] = []
+		mines_grid[y].resize(cuadratic_size)
 		
 	cells_grid = generate_grid()
 	add_random_bombs(cells_grid)
@@ -27,7 +27,8 @@ func _ready() -> void:
 	#print_grid()
 	
 func center_grid() -> void:
-	position = (get_viewport_rect().size / 2) - ((Vector2(CELL_WIDTH, CELL_HEIGHT) * cuadratic_size) / 2)
+	var offset = 20
+	position = (get_viewport_rect().size / 2) - ((Vector2(CELL_WIDTH - offset, CELL_HEIGHT) * cuadratic_size) / 2)
 
 func generate_grid() -> Array[Array]:
 	var x_origin: int = 0
@@ -58,16 +59,16 @@ func add_random_bombs(cells: Array[Array]) -> void:
 			if rand_number < mine_probability:
 				var cell = cells[column][row]
 				cell.has_mine = true
-				total_mines *= 1
+				total_mines += 1
 
 func get_grid_map(cells: Array[Array]) -> void:
 	for row in range(cuadratic_size):
 		for column in range(cuadratic_size):
 			var current_cell = cells[column][row]
 			if current_cell.has_mine:
-				grid[column][row] = 1
+				mines_grid[column][row] = 1
 			else:
-				grid[column][row] = 0
+				mines_grid[column][row] = 0
 
 func set_mines_around_cell(cells: Array[Array]) -> void:
 	for row in range(cuadratic_size):
@@ -109,7 +110,7 @@ func print_grid() -> void:
 	for y in range(cuadratic_size):
 		var line := ""
 		for x in range(cuadratic_size):
-			line += "%d " % grid[y][x]
+			line += "%d " % mines_grid[y][x]
 		print(line.strip_edges())
 
 func on_empty_cell(cell) -> void:
@@ -123,3 +124,10 @@ func on_mine_exploded() -> void:
 			var current_cell = cells_grid[column][row]
 			if current_cell.has_mine:
 				current_cell.open_cell()
+
+func clean_grid() -> void:
+	if cells_grid.size() == 0:
+		return
+		
+	for cell in cells_grid:
+		cell.free()
