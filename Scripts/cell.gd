@@ -19,6 +19,9 @@ func open_cell() -> void:
 		return
 	
 	if has_mine:
+		if get_parent().is_first_interaction:
+			get_parent().re_open_cell(self)
+			return
 		var mine_texture = preload("res://Assets/Cell/mine.png")
 		pressed = true
 		emit_signal("mine")
@@ -27,6 +30,7 @@ func open_cell() -> void:
 	
 	var pressed_texture : Texture
 	pressed = true
+	get_parent().is_first_interaction = false
 	match mines_around:
 		0:
 			pressed_texture = preload("res://Assets/Cell/pressed_cell.png")

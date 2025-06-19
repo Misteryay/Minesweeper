@@ -83,7 +83,7 @@ Values between 0 and 1
 [node name="ProbabilityInput" type="LineEdit" parent="."]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
-placeholder_text = "Default: 0.20"
+placeholder_text = "Default: 0.15"
 
 [node name="Start" type="Button" parent="."]
 layout_mode = 2

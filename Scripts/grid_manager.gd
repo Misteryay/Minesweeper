@@ -9,9 +9,12 @@ const CELL_HEIGHT = 32
 
 var mines_grid: Array = []
 var total_mines : int = 0
-var cells_grid: Array
+var cells_grid: Array = []
+var is_first_interaction : bool = true
 
 func start() -> void:
+	is_first_interaction = true
+	clean_grid()
 	center_grid()
 
 	mines_grid.resize(cuadratic_size)
@@ -126,8 +129,14 @@ func on_mine_exploded() -> void:
 				current_cell.open_cell()
 
 func clean_grid() -> void:
-	if cells_grid.size() == 0:
-		return
-		
-	for cell in cells_grid:
-		cell.free()
+	var cells = get_children()
+	
+	for cell in cells:
+		cell.queue_free()
+
+func re_open_cell(cell) -> void:
+	# Used when the player opens a cell with a mine on his first move
+	# Re generates the grid and opens again that cell
+	start()
+	cells_grid[cell.coordinates.y][cell.coordinates.x].open_cell()
+	
