@@ -13,6 +13,7 @@ var cells_grid: Array = []
 var is_first_interaction : bool = true
 
 func start() -> void:
+	total_mines = 0
 	is_first_interaction = true
 	clean_grid()
 	center_grid()
@@ -26,6 +27,7 @@ func start() -> void:
 	add_random_bombs(cells_grid)
 	get_grid_map(cells_grid)
 	set_mines_around_cell(cells_grid)
+	$"../HUD".start()
 	
 	#print_grid()
 	
@@ -140,3 +142,7 @@ func re_open_cell(cell) -> void:
 	start()
 	cells_grid[cell.coordinates.y][cell.coordinates.x].open_cell()
 	
+func update_hud(n) -> void:
+	var hud = $"../HUD"
+	hud.flags += n
+	hud.set_flags()

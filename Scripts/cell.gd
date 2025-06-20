@@ -18,10 +18,12 @@ func open_cell() -> void:
 	if flagged or pressed:
 		return
 	
+	if get_parent().is_first_interaction and (mines_around != 0 or has_mine):
+		get_parent().re_open_cell(self)
+		return
+	
 	if has_mine:
-		if get_parent().is_first_interaction:
-			get_parent().re_open_cell(self)
-			return
+
 		var mine_texture = preload("res://Assets/Cell/mine.png")
 		pressed = true
 		emit_signal("mine")
@@ -62,6 +64,7 @@ func flag_cell() -> void:
 		return
 	if not flagged:
 		print(self, " Flagged")
+		get_parent().update_hud(-1)
 		var flagged_texture = preload("res://Assets/Cell/flagged_cell.png")
 		texture = flagged_texture
 		flagged = true
@@ -69,7 +72,9 @@ func flag_cell() -> void:
 		
 	var normal_texture = preload("res://Assets/Cell/normal_cell.png")
 	texture = normal_texture
+	get_parent().update_hud(1)
 	flagged = false
+	
 
 
 func _on_control_gui_input(event: InputEvent) -> void:

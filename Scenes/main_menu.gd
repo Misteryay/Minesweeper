@@ -9,6 +9,7 @@ func _on_start_pressed() -> void:
 	var cuadratic_size: float  = size_text.to_float()
 	
 	var grid_manager = $"../GridManager"
+	var hud = $"../HUD"
 
 	if mine_probability == 0.0:
 		mine_probability = 0.15

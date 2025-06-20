@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://mnj6i2rdlo6"]
+[gd_scene load_steps=2 format=3 uid="uid://mnj6i2rdlo6"]
+
+[ext_resource type="Script" uid="uid://41kfp3if16ds" path="res://Scenes/hud.gd" id="1_e0onf"]
 
 [node name="HUD" type="HBoxContainer"]
 anchors_preset = 5
@@ -7,13 +9,18 @@ anchor_right = 0.5
 grow_horizontal = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 30
+script = ExtResource("1_e0onf")
 
-[node name="Time" type="Label" parent="."]
+[node name="TimeLabel" type="Label" parent="."]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Time: "
 
-[node name="Mines" type="Label" parent="."]
+[node name="FlagsLabel" type="Label" parent="."]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Flags: "
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
