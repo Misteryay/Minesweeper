@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://qvb224ka7jav"]
+
+[ext_resource type="Script" uid="uid://bndbmy14ifqa6" path="res://Scripts/main_game.gd" id="1_0e3vx"]
+[ext_resource type="PackedScene" uid="uid://dwsrxdby423o1" path="res://Scenes/grid_manager.tscn" id="1_pu3va"]
+[ext_resource type="PackedScene" uid="uid://mnj6i2rdlo6" path="res://Scenes/hud.tscn" id="2_0e3vx"]
+
+[node name="MainGame" type="Node"]
+script = ExtResource("1_0e3vx")
+
+[node name="GridManager" parent="." instance=ExtResource("1_pu3va")]
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="HUD" parent="Camera" instance=ExtResource("2_0e3vx")]
+offset_left = -136.0
+offset_top = -400.0
+offset_right = 128.0
+offset_bottom = -345.0
+
+[node name="ExitButton" type="Button" parent="Camera"]
+offset_left = -536.0
+offset_top = 344.0
+offset_right = -499.0
+offset_bottom = 399.0
+text = "Exit
+"
+
+[connection signal="game_lost" from="GridManager" to="Camera/HUD" method="_on_grid_manager_game_over"]
+[connection signal="game_win" from="GridManager" to="Camera/HUD" method="_on_grid_manager_game_win"]
+[connection signal="pressed" from="Camera/ExitButton" to="." method="_on_exit_button_pressed"]

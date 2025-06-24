@@ -1,5 +1,8 @@
 extends Node2D
 
+signal game_lost
+signal game_win
+
 @export var cell_scene: PackedScene
 @export var cuadratic_size: int = 3
 @export var mine_probability: float = 0.20 # Values between 0 and 1. 1 meaning everything is a bomb
@@ -27,13 +30,13 @@ func start() -> void:
 	add_random_bombs(cells_grid)
 	get_grid_map(cells_grid)
 	set_mines_around_cell(cells_grid)
-	$"../HUD".start()
+	$"../Camera/HUD".start()
+	print_grid()
 	
 	#print_grid()
 	
 func center_grid() -> void:
-	var offset = 20
-	position = (get_viewport_rect().size / 2) - ((Vector2(CELL_WIDTH - offset, CELL_HEIGHT) * cuadratic_size) / 2)
+	position = ((Vector2(-CELL_WIDTH, -CELL_HEIGHT) * cuadratic_size) / 2)
 
 func generate_grid() -> Array[Array]:
 	var x_origin: int = 0
@@ -52,6 +55,7 @@ func generate_grid() -> Array[Array]:
 			new_cell.position.y = y_origin
 			x_origin += CELL_WIDTH
 			cells_row.append(new_cell)
+			connect("game_lost", Callable(new_cell, "on_game_over"))
 		
 		cells.append(cells_row)
 		y_origin += CELL_HEIGHT
@@ -124,10 +128,12 @@ func on_empty_cell(cell) -> void:
 			neighbor.open_cell()
 
 func on_mine_exploded() -> void:
+	emit_signal("game_lost")
 	for row in range(cuadratic_size):
 		for column in range(cuadratic_size):
 			var current_cell = cells_grid[column][row]
 			if current_cell.has_mine:
+				current_cell.flagged = false
 				current_cell.open_cell()
 
 func clean_grid() -> void:
@@ -143,6 +149,21 @@ func re_open_cell(cell) -> void:
 	cells_grid[cell.coordinates.y][cell.coordinates.x].open_cell()
 	
 func update_hud(n) -> void:
-	var hud = $"../HUD"
+	var hud = $"../Camera/HUD"
 	hud.flags += n
 	hud.set_flags()
+	if hud.flags == 0:
+		check_win()
+
+func check_win() -> void:
+	var mines_uncovered : int = 0
+	for y in range(cuadratic_size):
+		for x in range(cuadratic_size):
+			var current_cell = cells_grid[y][x]
+			if current_cell.has_mine and not current_cell.flagged:
+				mines_uncovered += 1
+	print(mines_uncovered)
+	if mines_uncovered > 0:
+		return
+	emit_signal("game_win")
+	

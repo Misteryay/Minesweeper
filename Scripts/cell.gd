@@ -64,23 +64,24 @@ func flag_cell() -> void:
 		return
 	if not flagged:
 		print(self, " Flagged")
+		flagged = true
 		get_parent().update_hud(-1)
 		var flagged_texture = preload("res://Assets/Cell/flagged_cell.png")
 		texture = flagged_texture
-		flagged = true
 		return
 		
 	var normal_texture = preload("res://Assets/Cell/normal_cell.png")
 	texture = normal_texture
-	get_parent().update_hud(1)
 	flagged = false
-	
+	get_parent().update_hud(1)
 
+	
+func on_game_over() -> void:
+	$Control.set_mouse_filter(Control.MouseFilter.MOUSE_FILTER_IGNORE)
 
 func _on_control_gui_input(event: InputEvent) -> void:
 	if pressed:
 		return
-		
 	
 	if event is InputEventMouseButton and event.is_released() and event.button_index == MOUSE_BUTTON_LEFT:
 		open_cell()

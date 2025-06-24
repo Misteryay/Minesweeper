@@ -1,99 +1,153 @@
-[gd_scene load_steps=8 format=3 uid="uid://c65uaugtqo0me"]
+[gd_scene load_steps=8 format=3 uid="uid://dtmlg46a863fy"]
 
-[ext_resource type="Script" uid="uid://bf2mnl2ebtlbt" path="res://Scenes/main_menu.gd" id="1_28flt"]
+[ext_resource type="Script" uid="uid://dc5axop1nbx5r" path="res://Scripts/main_menu.gd" id="1_28flt"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ehe0"]
-bg_color = Color(0.306579, 0.0600529, 0.250469, 1)
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ce3w2"]
-bg_color = Color(0.305882, 0.0588235, 0.25098, 1)
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48xlc"]
-bg_color = Color(0.352941, 0, 0.00392157, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0.81604, 0.358651, 0.479228, 1)
-shadow_size = 2
-shadow_offset = Vector2(-0.695, 4.22)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n45e2"]
-bg_color = Color(0.352941, 0, 0.00392157, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0.81604, 0.358651, 0.479228, 1)
-shadow_size = 2
-shadow_offset = Vector2(-0.695, 4.22)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_erv1k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28flt"]
-bg_color = Color(0.352941, 0, 0.00392157, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0.81604, 0.358651, 0.479228, 1)
-shadow_size = 2
-shadow_offset = Vector2(-0.695, 4.22)
+bg_color = Color(0.641576, 0.641577, 0.645384, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_erv1k"]
-bg_color = Color(0.352349, 2.1719e-06, 0.00441198, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-shadow_color = Color(0.81604, 0.358651, 0.479228, 1)
-shadow_size = 2
-shadow_offset = Vector2(-0.695, 4.22)
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+expand_margin_left = 15.0
+expand_margin_top = 15.0
+expand_margin_right = 15.0
+expand_margin_bottom = 15.0
 
-[node name="MainMenu" type="VBoxContainer"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -128.5
-offset_right = 218.0
-offset_bottom = 128.5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_28flt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48xlc"]
+bg_color = Color(0.553023, 0.0683729, 0.732149, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ehe0"]
+bg_color = Color(0.185885, 0.0229819, 0.246094, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_28flt")
 
-[node name="GridLabel" type="Label" parent="."]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_1ehe0")
-text = "Set grid size.
-Integer values."
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_right = 130.0
+offset_bottom = 82.0
+grow_horizontal = 2
 
-[node name="GridInput" type="LineEdit" parent="."]
+[node name="Title" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
-placeholder_text = "Default: 15"
-
-[node name="ProbabilityLabel" type="Label" parent="."]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_1ehe0")
-text = "Set Mine probability.
-Values between 0 and 1
-[0-1]"
-
-[node name="ProbabilityInput" type="LineEdit" parent="."]
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_ce3w2")
-placeholder_text = "Default: 0.15"
-
-[node name="Start" type="Button" parent="."]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = SubResource("StyleBoxFlat_48xlc")
-theme_override_styles/hover = SubResource("StyleBoxFlat_n45e2")
+text = "Minesweeper"
+horizontal_alignment = 1
+
+[node name="Credits" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "by yay"
+horizontal_alignment = 1
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 37.0
+grow_vertical = 0
+text = "Exit"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="EasyButton" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_erv1k")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_erv1k")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_28flt")
 theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
-text = "Start Game"
+text = "Easy"
 
-[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[node name="MediumButton" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_erv1k")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+text = "Medium"
+
+[node name="HardButton" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_erv1k")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_erv1k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_28flt")
+theme_override_styles/normal = SubResource("StyleBoxFlat_erv1k")
+text = "Hard"
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0.615493, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0.615686, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_28flt")
+theme_override_styles/hover = SubResource("StyleBoxFlat_48xlc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1ehe0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_48xlc")
+text = "Custom Settings"
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/EasyButton" to="." method="_on_easy_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/MediumButton" to="." method="_on_medium_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/HardButton" to="." method="_on_hard_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/Button" to="." method="_on_button_pressed"]

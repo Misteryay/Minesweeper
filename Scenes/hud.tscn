@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://mnj6i2rdlo6"]
 
-[ext_resource type="Script" uid="uid://41kfp3if16ds" path="res://Scenes/hud.gd" id="1_e0onf"]
+[ext_resource type="Script" uid="uid://41kfp3if16ds" path="res://Scripts/hud.gd" id="1_e0onf"]
 
 [node name="HUD" type="HBoxContainer"]
 anchors_preset = 5
